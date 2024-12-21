@@ -1,0 +1,21 @@
+use joints;
+create table employe (emp_id INT PRIMARY KEY, emp_name VARCHAR(250));
+INSERT INTO employe values(1,'abhi');
+INSERT INTO employe values(2,'ravi');
+INSERT INTO employe values(3,'riya');
+INSERT INTO employe values(4,'kajal');
+INSERT INTO employe values(5,'tejal');
+
+select * from employe;
+
+create table salary (emp_id INT PRIMARY KEY, salary INT);
+INSERT INTO salary values(1,10000);
+INSERT INTO salary values(3,20000);
+INSERT INTO salary values(5,10000);
+select * from salary;
+
+select * from employe where  EXISTS (select emp_id from salary where employe.emp_id = salary.emp_id);
+
+select * from employe where NOT EXISTS (select emp_id from salary where employe.emp_id = salary.emp_id);
+
+select * from employe where  EXISTS (select emp_id from salary where employe.emp_id = salary.emp_id);

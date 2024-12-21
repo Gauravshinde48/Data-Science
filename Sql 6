@@ -1,0 +1,114 @@
+use new_schema;
+show tables;
+
+-- SHOWING TABLE DATA
+select * from medals_total;
+select * from teams;
+select * from torch_route;
+
+-- DROP COLUMN
+ALTER TABLE torch_route DROP COLUMN url;
+
+-- WHERE (CONDITION)
+Select * from medals_total WHERE Gold_Medal > 10;
+
+-- OPERATOR'S
+Select * from medals_total WHERE Silver_Medal < 15 AND Bronze_Medal < 15;
+Select * from medals_total WHERE Silver_Medal > 15 AND Bronze_Medal > 15;
+select * from teams where country = 'Germany' AND discipline = 'Swimming' AND team_gender = 'M';
+
+Select * from medals_total WHERE Gold_Medal >= 5 OR Bronze_Medal =15;
+Select * from medals_total WHERE  NOT (Gold_Medal >= 10);
+
+-- LIKE OPERATORS (WILDCARDS)
+ 
+Select * from torch_route WHERE city like "%N";
+Select * from torch_route WHERE city like "_A%";
+Select * from torch_route WHERE city like "%L_";
+Select * from torch_route WHERE city like "%_A_%";
+
+Select * from torch_route WHERE city like "M%e";
+
+Select * from torch_route WHERE city IN ('Olympia', 'Athens', 'Paris');
+Select * from torch_route WHERE city NOT IN ('Olympia', 'Athens', 'Paris');
+
+Select * from torch_route WHERE stage_number BETWEEN 40 AND 60;
+
+-- JOIN 'S
+
+SELECT *
+FROM medals_total
+INNER JOIN teams
+ON medals_total.country_code = teams.country_code;
+
+SELECT *
+FROM medals_total
+LEFT JOIN teams
+ON medals_total.country_code = teams.country_code;
+
+SELECT *
+FROM teams
+LEFT JOIN medals_total
+ON medals_total.country_code = teams.country_code;
+
+SELECT *
+FROM medals_total
+RIGHT JOIN teams
+ON medals_total.country_code = teams.country_code;
+
+     
+SELECT * FROM medals_total CROSS JOIN teams;
+
+SELECT *
+FROM medals_total
+WHERE Gold_medal > 5
+GROUP BY Gold_medal, Silver_Medal, country_code, Bronze_Medal, Total;
+
+select * from medals_total where  EXISTS (select country_code from teams where medals_total.country_code = teams.country_code);
+
+select * from medals_total where Gold_Medal < ALL(select Gold_Medal from medals_total where Gold_Medal = 19);
+
+select * from medals_total where Bronze_Medal = ANY(select Gold_Medal from medals_total where Total =  24);
+
+-- AGREGATE FUNCTION
+
+select max(Bronze_medal) from medals_total;
+select min(Gold_Medal) from medals_total;
+select sum(Total) from medals_total;
+select max(Total) from medals_total where Gold_medal > 10 group by Gold_Medal;
+select count(Total) from medals_total WHERE country_code like 'a%' group by country_code order by count(total) ; 
+
+select sum(num_athletes) from teams;  
+
+select sum(num_athletes) from teams group by team_gender having team_gender = 'M' ;   
+select sum(num_athletes) from teams group by team_gender having team_gender = 'W' ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

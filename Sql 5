@@ -1,0 +1,83 @@
+CREATE DATABASE ANY;
+USE ANY;
+
+create table employe (emp_id INT PRIMARY KEY, emp_name VARCHAR(250),salary VARCHAR(200), dept VARCHAR(200));
+INSERT INTO employe values(1,'john',20000,'hr');
+INSERT INTO employe values(2,'jenny',10000,'hr');
+INSERT INTO employe values(3,'jack',60000,'fsd');
+INSERT INTO employe values(4,'mack',40000,'tester');
+INSERT INTO employe values(5,'tom',30000,'hr');
+INSERT INTO employe values(6,'jerry',25000,'fsd');
+INSERT INTO employe values(7,'dora',30000,'accounts');
+INSERT INTO employe values(8,'nobi',20000,'hr');
+INSERT INTO employe values(9,'harry',48000,'fssd');
+INSERT INTO employe values(10,'carry',20000,'accounts');
+
+select * from employe;
+
+select * from employe where salary = ANY(select salary from employe where dept = 'hr');
+
+select * from employe where salary = ANY(select salary from employe where dept = 'accounts');
+
+select * from employe where  salary = ALL (select salary from employe where dept = 'accounts');
+
+select * from employe where  salary > ALL (select salary from employe where dept = 'accounts');
+select * from employe where  salary > ALL (select salary from employe where dept = 'hr');
+
+select salary,dept from employe where dept='accounts'; 
+use classicmodels;
+show tables;
+  
+
+select *from products;
+
+select *, 
+CASE 
+when buyprice>50 then "Expensive"
+when buyprice=50 then "affordable"
+else"cheap"
+end as productstatus from products;
+
+select * from payments;
+
+select *,
+CASE
+when amount <10000 then "poor"
+when amount <30000 then "rich"
+else "ultra rich"
+end as amount from payments;  
+
+select * from offices;
+
+select *,
+CASE
+when country = "USA" then "american"
+when country = "France" then "francy"
+when country = "Japan" then "Japanies"
+when country = "Australia" then "Australian"
+when country = "UK" then "ukian's" 
+end as country from offices;
+
+use new_schema;
+show tables;
+
+select * from pc_export_2014_2015;
+select * from pc_export_2015_2016;
+select * from pc_export_2016_2017;
+
+
+select * from shopping mall customer segmentation data;
+select * from death;
+
+
+
+select * from death where 'NEOPLASMS' > 10000;
+
+select min('BLOOD AND IMMUNE') from death;
+
+select * from death where 'NEOPLASMS' > 10000 
+
+select * from shop_data;
+
+
+

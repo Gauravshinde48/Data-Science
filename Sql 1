@@ -1,0 +1,33 @@
+create database g; 
+use g;
+
+
+create table dog(serial_no INT PRIMARY KEY, breed VARCHAR(250), colour VARCHAR(300), height INT);
+
+start transaction;
+insert into dog(serial_no,breed,colour,height)
+values(1,"siri","black","4.5");
+select * from dog;
+select * from dog;
+insert into dog(serial_no,breed,colour,height)
+values(1,"siri","black","4.5");
+rollback;
+commit;
+select * from dog;
+start transaction;
+insert into dog(serial_no,breed,colour,height)
+values(2,"lab","golden","1");
+select * from dog;
+savepoint s1;
+insert into dog(serial_no,breed,colour,height)
+values(3,"yash","white","2");
+savepoint s2;
+delete from dog 
+where serial_no = 1;
+rollback to s2;
+select * from dog;
+
+ select * from customers;
+ select * from pc_export_2014_2015;
+ show tables;
+ 

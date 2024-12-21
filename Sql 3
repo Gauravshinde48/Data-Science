@@ -1,0 +1,80 @@
+use joints;
+create table student(roll_no INT PRIMARY KEY, names VARCHAR(200) NOT NULL, address VARCHAR(250) NOT NULL,phone INT, age INT);
+CREATE table studentcourse(course_id INT, roll_no INT references student(roll_no));
+INSERT INTO student (roll_no, names, address, phone, age)
+VALUES ('1', 'harsh', 'delhi', '1111', 18);
+INSERT INTO student (roll_no, names, address, phone, age)
+VALUES ('2', 'pratik', 'bihar', '2222', 19);
+INSERT INTO student (roll_no, names, address, phone, age)
+VALUES ('3', 'riya', 'siligar', '3333', 20);
+INSERT INTO student (roll_no, names, address, phone, age)
+VALUES ('4', 'deep', 'ramnagar', '4444', 19);
+INSERT INTO student (roll_no, names, address, phone, age)
+VALUES ('5', 'shri', 'kolkata', '5555', 19);
+INSERT INTO student (roll_no, names, address, phone, age)
+VALUES ('6', 'raj', 'barbajar', '66666', 20);
+INSERT INTO student (roll_no, names, address, phone, age)
+VALUES ('7', 'rohit', 'balurghat', '7777', 18);
+INSERT INTO student (roll_no, names, address, phone, age)
+VALUES ('8', 'niraj', 'alipur', '8888', 19);
+
+INSERT INTO studentcourse (course_id,roll_no)
+VALUES('1','1');
+INSERT INTO studentcourse (course_id,roll_no)
+VALUES('2','2');
+INSERT INTO studentcourse (course_id,roll_no)
+VALUES('3','3');
+INSERT INTO studentcourse (course_id,roll_no)
+VALUES('4','4');
+INSERT INTO studentcourse (course_id,roll_no)
+VALUES('1','5');
+INSERT INTO studentcourse (course_id,roll_no)
+VALUES('4','9');
+INSERT INTO studentcourse (course_id,roll_no)
+VALUES('5','10');
+INSERT INTO studentcourse (course_id,roll_no)
+VALUES('4','11');
+
+select * from student;
+select * from studentcourse;
+
+select * from student inner join studentcourse on student.roll_no = studentcourse.roll_no;  
+select course_id from student inner join studentcourse on student.roll_no = studentcourse.roll_no;  
+select studentcourse.course_id,'student.roll_no' from student inner join studentcourse on student.roll_no = studentcourse.roll_no;  
+select * from student left join studentcourse on student.roll_no = studentcourse.roll_no; 
+select * from student right join studentcourse on student.roll_no = studentcourse.roll_no; 
+select * from studentcourse right join student on student.roll_no = studentcourse.roll_no; 
+SELECT * 
+FROM student 
+LEFT JOIN studentcourse 
+ON student.roll_no = studentcourse.roll_no 
+UNION
+SELECT * 
+FROM studentcourse 
+RIGHT JOIN student 
+ON student.roll_no = studentcourse.roll_no ;
+
+select * from student cross join studentcourse on student.roll_no = studentcourse.roll_no; 
+select student.roll_no, student.names,student.address,student.phone,studentcourse.course_id,studentcourse.roll_no from student self join studentcourse on student.roll_no = studentcourse.roll_no; 
+
+SELECT student.roll_no, student.names, student.address, student.phone, studentcourse.course_id, studentcourse.roll_no 
+FROM student 
+LEFT JOIN studentcourse 
+ON student.roll_no = studentcourse.roll_no
+UNION
+SELECT student.roll_no, student.names, student.address, student.phone, studentcourse.course_id, studentcourse.roll_no 
+FROM student
+LEFT JOIN studentcourse 
+ON student.roll_no = studentcourse.roll_no ;
+
+
+select * from student full join studentcourse on 'student.roll_no' = 'studentcourse.roll_no';   
+select course_id as id from studentcourse;
+
+select * from student cross join studentcourse;
+
+
+select * from studentcourse;
+
+
+
